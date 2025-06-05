@@ -1,41 +1,51 @@
 using Microsoft.Extensions.Configuration;
-using Microsoft.AspNetCore.Identity.UI.Services;
 using System.Net.Mail;
 using System.Net;
 using System.Threading.Tasks;
 using ruhanBack.Interfaces;
+using System;
 
 public class SendEmailRepository : ISendEmailRepository
 {
     private readonly IConfiguration _configuration;
+    private readonly SmtpClient _client;
 
     public SendEmailRepository(IConfiguration configuration)
     {
         _configuration = configuration;
+
+        // Initialize the SMTP client once to avoid overhead per request
+        _client = new SmtpClient
+        {
+            Host = _configuration["EmailSettings:Host"],
+            Port = int.Parse(_configuration["EmailSettings:Port"]),
+            EnableSsl = bool.Parse(_configuration["EmailSettings:EnableSsl"]),
+            Credentials = new NetworkCredential(
+                _configuration["EmailSettings:Username"],
+                _configuration["EmailSettings:Password"]
+            )
+        };
     }
 
     public async Task SendEmail(string email, string subject, string message)
     {
-        var host = _configuration["EmailSettings:Host"];
-        var port = int.Parse(_configuration["EmailSettings:Port"]);
-        var enableSsl = bool.Parse(_configuration["EmailSettings:EnableSsl"]);
-        var username = _configuration["EmailSettings:Username"];
-        var password = _configuration["EmailSettings:Password"];
-        var from = _configuration["EmailSettings:From"];
+        try
+        {
+            using var mail = new MailMessage
+            {
+                From = new MailAddress(_configuration["EmailSettings:From"]),
+                Subject = subject,
+                Body = message,
+                IsBodyHtml = true
+            };
+            mail.To.Add(email);
 
-        using (var client = new SmtpClient(host, port)
+            await _client.SendMailAsync(mail);
+        }
+        catch (Exception ex)
         {
-            EnableSsl = enableSsl,
-            Credentials = new NetworkCredential(username, password)
-        })
-        using (var mail = new MailMessage(from, email)
-        {
-            Subject = subject,
-            Body = message,
-            IsBodyHtml = true
-        })
-        {
-            await client.SendMailAsync(mail);
+            // Consider logging this exception
+            throw new InvalidOperationException("Failed to send email.", ex);
         }
     }
 }

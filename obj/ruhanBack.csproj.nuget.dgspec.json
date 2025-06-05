@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Mohamad\\OneDrive\\Desktop\\Ruhan_Next+asp\\ruhanBack\\ruhanBack.csproj": {}
+    "C:\\Users\\Mohamad\\OneDrive\\Desktop\\Ruhan_Next+asp\\ruhanback\\ruhanBack.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Mohamad\\OneDrive\\Desktop\\Ruhan_Next+asp\\ruhanBack\\ruhanBack.csproj": {
+    "C:\\Users\\Mohamad\\OneDrive\\Desktop\\Ruhan_Next+asp\\ruhanback\\ruhanBack.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Mohamad\\OneDrive\\Desktop\\Ruhan_Next+asp\\ruhanBack\\ruhanBack.csproj",
+        "projectUniqueName": "C:\\Users\\Mohamad\\OneDrive\\Desktop\\Ruhan_Next+asp\\ruhanback\\ruhanBack.csproj",
         "projectName": "ruhanBack",
-        "projectPath": "C:\\Users\\Mohamad\\OneDrive\\Desktop\\Ruhan_Next+asp\\ruhanBack\\ruhanBack.csproj",
+        "projectPath": "C:\\Users\\Mohamad\\OneDrive\\Desktop\\Ruhan_Next+asp\\ruhanback\\ruhanBack.csproj",
         "packagesPath": "C:\\Users\\Mohamad\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Mohamad\\OneDrive\\Desktop\\Ruhan_Next+asp\\ruhanBack\\obj\\",
+        "outputPath": "C:\\Users\\Mohamad\\OneDrive\\Desktop\\Ruhan_Next+asp\\ruhanback\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

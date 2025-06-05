@@ -23,29 +23,34 @@ public class OtpRepository : IOtpRepository
     }
 
     public async Task<string> GenerateOtp(string email)
+{
+    try
     {
-        try{
         Random random = new Random();
-        string otpvalue = random.Next(100000, 1000000).ToString();
-        var otp = new Otp{
+        string otpValue = random.Next(100000, 1000000).ToString();
+
+        var otp = new Otp
+        {
             Id = Guid.NewGuid().ToString(),
-            email=email,
-            otp=otpvalue,
-            date=DateTime.UtcNow
+            email = email,
+            otp = otpValue,
+            date = DateTime.UtcNow
         };
+
         _context.otp.Add(otp);
         await _context.SaveChangesAsync();
 
-        await _sendEmailRepository.SendEmail(email,"Otp",otp.otp);
+        // Fire-and-forget email sending (does not delay response)
+        _ = Task.Run(() => _sendEmailRepository.SendEmail(email, "Otp", otpValue));
 
         return "OTP sent successfully";
-        }
-        catch
+    }
+    catch
     {
-        return "Error Sending The Email";
+        return "Error sending the OTP";
     }
-        
-    }
+}
+
 
    public async Task<string> ValidateOtp(string email, DateTime date, string otp)
 {
