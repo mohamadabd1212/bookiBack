@@ -8,9 +8,10 @@ namespace ruhanBack.Data
     public class ApplicationDbContext : IdentityDbContext<IdentityUser>
     {
         public DbSet<Otp> otp { get; set; }
+        public DbSet<items> Items { get; set; }
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
-        { 
-            
+        {
+
         }
 
         
