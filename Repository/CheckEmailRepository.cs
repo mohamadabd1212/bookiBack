@@ -123,7 +123,7 @@ public async  Task verifyEmailRequest(string email)
 
             var jwtToken = new JwtSecurityTokenHandler().WriteToken(token);
             
-            return "yes";
+            return jwtToken;
         }
         return "no ver";
 }
