@@ -59,7 +59,7 @@ public class OtpRepository : IOtpRepository
 
     if (storedOtp == null)
     {
-        return "Invalid Otp Try Again";
+        return "Invalid Otp";
     }
     if ((DateTime.UtcNow - storedOtp.date).TotalMinutes > 2)
     {

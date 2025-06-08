@@ -53,10 +53,14 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+
+
+
+app.UseRouting();
+
 // Enable CORS by specifying the policy name
 app.UseCors("AllowNextJsOrigin");
 
-app.UseRouting();
 
 // Authentication and Authorization middleware
 app.UseAuthentication();  
